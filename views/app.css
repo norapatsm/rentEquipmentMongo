@@ -1,7 +1,8 @@
 body {
     display: flex;
     justify-content: center;
-    background-color: rgb(212, 255, 0);
+    
+    background: url("background1.jpg") no-repeat center center fixed;
 }
 
 form {
