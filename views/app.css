@@ -1,6 +1,7 @@
 body {
     display: flex;
     justify-content: center;
+    background-color: rgb(212, 255, 0);
 }
 
 form {
@@ -22,7 +23,7 @@ form .input-field:first-child {
 }
 
 form input[type="submit"] {
-    background: linear-gradient(to left, #313131, #7c7c8f);
+    background: linear-gradient(to left, #0059ff, #eeff00);
     color: white;
     border-radius: 4px;
     margin-top: 2rem;
