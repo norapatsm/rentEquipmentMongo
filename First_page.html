@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+         <meta charset="UTF-8">
+         <title>โปรเเกรมยืมคืนอุปกรณ์</title>
+         <link rel="stylesheet" href="First_page.css">
+     </head>
+     <style>
+       #admin_btn {
+           position: absolute;
+           bottom: 10px;
+           right: 10px;
+       }
+     </style>
+     <body>
+       <h1>โปรเเกรมยืมคืนอุปกรณ์</h1>
+       <h2>Please login</h2>
+     <form>
+         <label class = "dec_label"for = "f_name" i >First-Last Name: </label>
+         <input class = "dec_input" type="text" id="f_name" name="f_name" size="25">
+         <br><br><br>
+         <label class = "dec_label"for = "p_id" i >Student ID: </label>
+         <input class = "dec_input"type="number" id="p_id" name="p_id"size="25">
+         <br><br><br>
+         <div id="output_block2">
+          <button type="button" id = "sub_list" onclick="submitForm()">Submit</button>
+         </div>
+     </form>
+     <button type="button" id = "admin_btn" onclick="adminForm()">Only Admin</button>
+     <script>
+      function submitForm() {
+          var fName = document.getElementById("f_name").value;
+          var sId = document.getElementById("p_id").value;
+          if (fName === "" || sId === "") {
+      alert("Please fill in First-Last Name and Student ID");
+  } else {
+      window.location.href = "second_page.html";
+  }
+}
+
+function adminForm() {
+window.location.href = "admin_page.html";
+}
+</script>
+
+</body>
+</html>
