@@ -33,8 +33,23 @@ router.post('/login', async (req, res, next )=>{
     } 
 })
 
-router.get('/dashboard',(req,res)=>{
-    res.send('this is dash board <hr> <a href="/logout">click me to logout</a> ');
+router.get('/dashboard',(req,res,next)=>{
+    session = req.session;
+    if(session.id){
+        /** has log in yet */
+        next();/** ทำให้กระโดดไปตัต่อไป */
+    }else{
+        /**ถ้าไม่มี session ฝังใน browser */
+        print("เเกไม่มีสิทธิ")
+    }
+},
+/**เมื่อ login ไปเเล้ว ก็เข้ามาที่นี้เลย */
+(req,res,next)=>{
+res.send('this is dash board <hr> <a href="/logout">click me to logout</a> ');
+});
+
+router.get((req,res,next)=>{
+    
 });
 
 router.get('/logout', (req, res) => {
