@@ -19,36 +19,36 @@ router.get('/', (req, res) => {
 router.post('/login', async (req, res, next )=>{ 
     //console.log("in the session :",req.session);
     //if (req.body.username == myusername && req.body.password == mypassword) { // ไว้เเเบบ ไม่มี database
-    let id = await getUsers({username:req.body.username, password:req.body.password});
-    console.log(id);
-    if(id) {
-        /**login pass */
-        session=req.session;
-        session.userid = id;
-        console.log(session,"has loged in\n");
+    let user = (await getUsers({username:req.body.username, password:req.body.password}))[0];
+    console.log(user);
+    if (user!==undefined){
+        /**loginpass */
+        session = req.session
+        session.userid = user.id
+        console.log(session.userid,'login pass');
         res.redirect('/dashboard');
+    }else{
+        /**login not pass */
+        res.redirect('/');
     }
-    else{
-        res.render('login.ejs');
-    } 
 })
 
 router.get('/dashboard',(req,res,next)=>{
     session = req.session;
-    if(session.id){
+    if(session.userid){
         /** has log in yet */
-        next();/** ทำให้กระโดดไปตัต่อไป */
+        next()
     }else{
-        /**ถ้าไม่มี session ฝังใน browser */
-        res.redirect('/');
+       /**not login yet */
+       res.redirect('/');
     }
 },
 /**เมื่อ login ไปเเล้ว ก็เข้ามาที่นี้เลย */
 (req,res,next)=>{
-res.send('this is dash board <hr> <a href="/logout">click me to logout</a> ');
+    session=req.session;
+    console.log(session.id,"went to dash board");
+    res.send('this is dash board <hr> <a href="/logout">click me to logout</a> ');
 });
-
-
 
 router.get('/logout', (req, res) => {
     req.session.destroy();
