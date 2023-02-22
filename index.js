@@ -7,7 +7,7 @@ const mainRouter = require('./routes/Router.js');
 const oneDay = 1000 * 60 * 60 * 24;
 
 app.use(sessions({
-    secret: "spasecretภาษาไทย",
+    secret: "key",
     saveUninitialized: true,
     cookie: { maxAge: oneDay },
     resave: false
@@ -21,7 +21,6 @@ app.set('view engine','ejs');
 // a lot of route
 app.use('/', mainRouter);
 app.use(express.static('public')) // folder สาธราณะ ไม่ต้องเข้าผ่าน route
-
 
 const port = 3000;
 
