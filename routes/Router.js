@@ -20,7 +20,7 @@ router.post('/login', async (req, res, next )=>{
     //console.log("in the session :",req.session);
     //if (req.body.username == myusername && req.body.password == mypassword) { // ไว้เเเบบ ไม่มี database
     let id = await getUsers({username:req.body.username, password:req.body.password});
-    //console.log(id);
+    console.log(id);
     if(id) {
         /**login pass */
         session=req.session;
@@ -48,9 +48,7 @@ router.get('/dashboard',(req,res,next)=>{
 res.send('this is dash board <hr> <a href="/logout">click me to logout</a> ');
 });
 
-router.get((req,res,next)=>{
-    
-});
+
 
 router.get('/logout', (req, res) => {
     req.session.destroy();
