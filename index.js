@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
     if (session.userid) {
         res.send("Welcome User <a href=\'/logout'>click to logout</a>");
     } else
-        res.sendFile()
+        res.render('login.ejs');
 });
 
 app.post('/login', (req, res) => {
