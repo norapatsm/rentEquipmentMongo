@@ -14,6 +14,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser());
 app.use(express.static(__dirname));
+app.use(express.static('public'))
+app.set('view engine', 'ejs');
 
 const myusername = 'admin'
 const mypassword = '1234'
@@ -26,10 +28,10 @@ app.get('/', (req, res) => {
     if (session.userid) {
         res.send("Welcome User <a href=\'/logout'>click to logout</a>");
     } else
-        res.sendFile('views/index.html', { root: __dirname })
+        res.sendFile()
 });
 
-app.post('/user', (req, res) => {
+app.post('/login', (req, res) => {
     if (req.body.username == myusername && req.body.password == mypassword) {
         session = req.session;
         session.userid = req.body.username;
