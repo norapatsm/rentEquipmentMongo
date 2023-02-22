@@ -40,7 +40,7 @@ router.get('/dashboard',(req,res,next)=>{
         next();/** ทำให้กระโดดไปตัต่อไป */
     }else{
         /**ถ้าไม่มี session ฝังใน browser */
-        print("เเกไม่มีสิทธิ")
+        res.redirect('/');
     }
 },
 /**เมื่อ login ไปเเล้ว ก็เข้ามาที่นี้เลย */
