@@ -55,4 +55,57 @@ router.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
+router.get('/admin',(req,res)=>{ /**for render login page */
+    res.render('adminLogin.ejs');
+});
+
+router.post('/admin/login',  /**for recive data from login form */
+async (req,res)=>{
+    let id = await getaAdminId(req.body.username, req.body.password);
+    if(id===""){
+        /** log in fail */
+        res.redirect('/admin');
+    }else{
+        /**login passed */
+        session = req.session;
+        session.adminid = id;
+        console.log('admin',session.adminid,'loged in');
+        res.redirect('/adminboard');
+    }});
+
+router.get('/adminboard',(req,res,next)=>{
+    session = req.session
+    if(session.adminid){
+        /**has loged in yet */
+        next()
+    }else{
+        /**not has login before */
+        res.redirect('/admin');
+    }
+},async (req,res)=>{
+    let users = await getUsers({});
+    let events = await getEvents({});
+    res.render('adminboard.ejs',{data:{
+        users: users,
+        events:events
+    }});
+});
+
+router.get('/user/:id',(req,res,next)=>{
+    session = req.session
+    if(session.adminid){
+        /**has login yet */
+        next();
+    }else{
+        /**has not login yet must go to login*/
+        res.redirect('/admin');
+    }
+},(req,res)=>{
+    let id = req.params.id;
+    console.log('admin editing',id);
+    res.render('edituser.ejs',{data:{
+
+    }});
+});
+
 module.exports = router;
