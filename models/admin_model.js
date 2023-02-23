@@ -14,12 +14,9 @@ db.on('error', (err) => {
     console.error('connection error T_T :', err);
 });
 
-const userSchema = new mongoose.Schema({
+const adminSchema = new mongoose.Schema({
     username: { type: String, trim: true, required: true },
-    password: { type: String, trim: true, required: true },
-    fname: { type: String, trim: true, required: true },
-    lname: { type: String, trim: true, required: true },
-    borrowed: { type: Object, default: {} }
+    password: { type: String, trim: true, required: true },}
 })
 
-module.exports = mongoose.model('users', userSchema);
+module.exports = mongoose.model('admin', adminSchema);
