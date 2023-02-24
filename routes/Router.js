@@ -29,7 +29,7 @@ router.post('/login', async (req, res, next )=>{
         res.redirect('/dashboard');
     }else{
         /**login not pass */
-        res.redirect('/');
+        res.redirect('/admin');
     }
 })
 
